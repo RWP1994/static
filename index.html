@@ -3,41 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Table Example</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Tabbed Navigation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 2px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-bottom: none;
+      background: #f4f4f4;
+    }
+
+    .tab.active {
+      background: #fff;
+      font-weight: bold;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>My Table Example</h1>
-    <nav>
-      <a href="favorites.html">Go to Favorites</a>
-    </nav>
-  </header>
-  
-  <main>
-    <section>
-      <h2>Table of Information</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Favorite Animal</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Robert</td>
-            <td>Prickett</td>
-            <td>Dogs</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </main>
-  
-  <footer>
-    <p>&copy; 2025 My Table Example. All rights reserved.</p>
-  </footer>
+  <h1>Tabbed Navigation Example</h1>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <div class="tab active" data-target="favorites">Favorites</div>
+    <div class="tab" data-target="signup">Sign Up</div>
+  </div>
+
+  <!-- Tab Content -->
+  <div id="favorites" class="tab-content active">
+    <iframe src="favorites.html" width="100%" height="400px" style="border:none;"></iframe>
+  </div>
+  <div id="signup" class="tab-content">
+    <iframe src="signup.html" width="100%" height="400px" style="border:none;"></iframe>
+  </div>
+
+  <script>
+    // JavaScript for Tab Switching
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active class from all tabs and contents
+        tabs.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(tc => tc.classList.remove('active'));
+
+        // Add active class to the clicked tab and its content
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.target).classList.add('active');
+      });
+    });
+  </script>
 </body>
 </html>
